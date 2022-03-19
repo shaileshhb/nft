@@ -1,7 +1,9 @@
-const { config } = require("dotenv");
 
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-etherscan");
 require("dotenv").config();
+
+// const { config } = require("dotenv");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -23,13 +25,19 @@ module.exports = {
   solidity: "0.8.4",
   networks: {
     rinkeby: {
-      url: config.env.STAGING_ALCHEMY_KEY,
-      accounts: [config.env.PRIVATE_KEY],
+      url: process.env.STAGING_ALCHEMY_KEY,
+      accounts: [process.env.PRIVATE_KEY],
     },
     mainnet: {
       chainId: 1,
-      url: config.env.PROD_ALCHEMY_KEY,
-      accounts: [config.env.PRIVATE_KEY],
+      url: process.env.PROD_ALCHEMY_KEY,
+      accounts: [process.env.PRIVATE_KEY],
     },
+  },
+  etherscan: {
+    // url: process.env.PROD_ALCHEMY_KEY,
+    apiKey: {
+      rinkeby: process.env.ETHERSCAN_API_KEY,
+    }
   },
 };
